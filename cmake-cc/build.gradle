@@ -16,7 +16,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-group = 'org.example'
+group = 'org.oedteq.cmakecc'
 version = '1.0-SNAPSHOT'
 
 uploadArchives {
