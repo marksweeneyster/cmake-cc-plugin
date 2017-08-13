@@ -1,5 +1,6 @@
 package org.oedteq.cmakecc
 
+import org.gradle.api.DefaultTask
 import org.gradle.api.provider.PropertyState
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Exec
@@ -22,16 +23,10 @@ class CmakeTask extends Exec {
 
     @Override
     protected void exec() {
+        args = ['-G'+getGenerator(), ".."]
         super.exec()
     }
-/*
-    @TaskAction
-    def cmake() {
-        println greeting
-        args = ['-G'+generator, ".."];
-        executable 'cmake'
-    }
-*/
+
     @Input
     public String getGenerator() {
         return generator.get()
@@ -44,19 +39,22 @@ class CmakeTask extends Exec {
     public void setGenerator(Provider<String> generator) {
         this.generator.set(generator)
     }
-
+/*
     @TaskAction
     public void cmake() {
         // Access the raw value during the execution phase of the build lifecycle
-        System.out.println("Retrieving generator " + getGenerator())
+        println "Retrieving generator " + getGenerator()
 
-        executable 'cmake'
+        println 'generator: ' + generator.get()
 
-        setWorkingDir("build")
+        //executable 'cmake'
 
-        args = ['-G'+generator, ".."];
+        //setWorkingDir("build")
+
+        //args = ['-G'+generator, ".."];
 
         // do additional work
     }
+    */
 }
 

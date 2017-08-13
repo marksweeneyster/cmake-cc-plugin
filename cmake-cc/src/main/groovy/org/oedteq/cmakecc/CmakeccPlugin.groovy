@@ -8,7 +8,7 @@ class CmakeccPlugin implements Plugin<Project> {
     static final String EXTENSION_NAME = 'cmakeConfig'
 
     void apply(Project project) {
-        CmakeccExtension extension = project.getExtensions().create(EXTENSION_NAME, CmakePluginExtension.class, project)
+        CmakeccExtension extension = project.getExtensions().create(EXTENSION_NAME, CmakeccExtension.class, project)
 /*
         project.task('cmake', type: CmakeTask) {
             def extension = project.extensions.findByName(EXTENSION_NAME)
