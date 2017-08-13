@@ -1,0 +1,18 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            url uri('../repo')
+        }
+    }
+    dependencies {
+        classpath group: 'org.oedteq.cmakecc', name: 'cmake-cc',
+				  version: '1.0-SNAPSHOT'
+    }
+}
+
+apply plugin: 'org.oedteq.cmakecc'
+
+cmakeConfig {
+     generator = 'Ninja'
+}
