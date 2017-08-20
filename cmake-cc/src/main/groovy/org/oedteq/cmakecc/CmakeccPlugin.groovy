@@ -28,7 +28,6 @@ class CmakeccPlugin implements Plugin<Project> {
             public void execute(CmakeBuildTask cmakeBuildTask) {
             }
         }).dependsOn((project.tasks.findByName('cmakeTask')));
-        //cmakeBuildTask.dependsOn((project.tasks.findByName('cmakeTask')))
     }
 }
 
