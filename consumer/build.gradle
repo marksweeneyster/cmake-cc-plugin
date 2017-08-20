@@ -15,4 +15,5 @@ apply plugin: 'org.oedteq.cmakecc'
 
 cmakeConfig {
      generator = 'Ninja'
+     cmakeInstallPrefix = '../install'
 }

@@ -8,20 +8,7 @@ import org.gradle.api.tasks.Exec
 class CmakeccExtension {
     String[] platforms= []
     private final PropertyState<String> generator
-
-    //private Project project
-
-
-    public String getGenerator() {
-        return generator.get()
-    }
-
-    public Provider<String> getGeneratorProvider() {
-        return generator;
-    }
-    public void setGenerator(String generator) {
-        this.generator.set(generator)
-    }
+    private final PropertyState<String> cmakeInstallPrefix
 
     CmakeccExtension() {
     }
@@ -29,39 +16,28 @@ class CmakeccExtension {
     CmakeccExtension(Project project) {
         //this.project = project
         generator = project.property(String.class);
-        //println 'generator: ' + generator.get()
-
-        //generator = "Ninja"
-        /* project.configure(project) {
-            apply plugin: 'maven-publish'
-            publishing {
-                repositories {
-                    maven {
-                        name "buildDir"
-                        url "$buildDir/m2repository"
-                    }
-                }
-
-                // convenience targets for each repo
-                platforms.each { platform ->
-                    makeCmakeTask(platform)
-                }
-            }
-        }  */
-
-    }
-/*
-    String makeTaskSuffix(platform) {
-        return 'Platform' + platform.name.capitalize()
+        cmakeInstallPrefix = project.property(String.class);
     }
 
-    Exec makeCmakeTask(platform) {
-        def taskName= "cmake${makeTaskSuffix(platform)}"
-        def task= project.tasks.findByPath(taskName)
-        if (task == null) {
-            task= project.task(taskName)
-        }
-        return task
+    public String getGenerator() {
+        return generator.get()
     }
-    */
+    public Provider<String> getGeneratorProvider() {
+        return generator;
+    }
+    public void setGenerator(String generator) {
+        this.generator.set(generator)
+    }
+
+    public String getCmakeInstallPrefix() {
+        return cmakeInstallPrefix.get()
+    }
+    public Provider<String> getCmakeInstallPrefixProvider() {
+        return cmakeInstallPrefix;
+    }
+    public void setCmakeInstallPrefix(String cmakeInstallPrefix) {
+        this.cmakeInstallPrefix.set(cmakeInstallPrefix)
+    }
+
+
 }
