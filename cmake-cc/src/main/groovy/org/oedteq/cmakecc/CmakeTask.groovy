@@ -62,7 +62,7 @@ class CmakeTask extends Exec {
 
     @Input
     public String getCmakeInstallPrefix() {
-        return cmakeInstallPrefix.getOrNull() ?: defaultCmakeListsDir;
+        return cmakeInstallPrefix.getOrNull() ?: defaultInstallDir;
     }
     public void setCmakeInstallPrefix(String cmakeInstallPrefix) {
         this.cmakeInstallPrefix.set(cmakeInstallPrefix)

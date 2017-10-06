@@ -16,6 +16,11 @@ buildscript {
 apply plugin: 'org.oedteq.cmakecc'
 
 cmakeConfig {
-     cmakeInstallPrefix = './install'
-     cmakeListsDir = "./.."
+    // these are the defaults
+
+    generator = 'Ninja'
+    buildingDir = 'build' // the name workingDir is already defined in the task's parent
+    // the next two directories are relative to the working directory, 'buildingDir', where cmake is invoked
+    cmakeListsDir = "./.."
+    cmakeInstallPrefix = './install'
 }
