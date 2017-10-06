@@ -8,8 +8,9 @@ import org.gradle.api.tasks.Exec
 class CmakeccExtension {
     String[] platforms= []
     private final PropertyState<String> generator
-    private final PropertyState<String> cmakeInstallPrefix
+    private final PropertyState<String> installPrefix
     private final PropertyState<String> cmakeListsDir
+    private final PropertyState<String> toolchainFile
     // workingDir is already defined for exec tasks so I use buildingDir
     private final PropertyState<String> buildingDir
 
@@ -18,10 +19,11 @@ class CmakeccExtension {
 
     CmakeccExtension(Project project) {
         //this.project = project
-        generator          = project.property(String.class);
-        cmakeInstallPrefix = project.property(String.class);
-        cmakeListsDir      = project.property(String.class);
-        buildingDir        = project.property(String.class);
+        generator     = project.property(String.class);
+        installPrefix = project.property(String.class);
+        cmakeListsDir = project.property(String.class);
+        toolchainFile = project.property(String.class);
+        buildingDir   = project.property(String.class);
     }
 
     public String getGenerator() {
@@ -34,14 +36,14 @@ class CmakeccExtension {
         this.generator.set(generator)
     }
 
-    public String getCmakeInstallPrefix() {
-        return cmakeInstallPrefix.get()
+    public String getInstallPrefix() {
+        return installPrefix.get()
     }
-    public Provider<String> getCmakeInstallPrefixProvider() {
-        return cmakeInstallPrefix;
+    public Provider<String> getInstallPrefixProvider() {
+        return installPrefix;
     }
-    public void setCmakeInstallPrefix(String cmakeInstallPrefix) {
-        this.cmakeInstallPrefix.set(cmakeInstallPrefix)
+    public void setInstallPrefix(String installPrefix) {
+        this.installPrefix.set(installPrefix)
     }
 
     public String getCmakeListsDir() {
@@ -62,6 +64,16 @@ class CmakeccExtension {
     }
     public void setBuildingDir(String buildingDir) {
         this.buildingDir.set(buildingDir)
+    }
+
+    public String getToolchainFile() {
+        return toolchainFile.get()
+    }
+    public Provider<String> getToolchainFileProvider() {
+        return toolchainFile;
+    }
+    public void setToolchainFile(String toolchainFile) {
+        this.toolchainFile.set(toolchainFile)
     }
 
 

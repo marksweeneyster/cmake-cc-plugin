@@ -1,11 +1,11 @@
 buildscript {
     repositories {
-        mavenLocal()
-        /*
+        //mavenLocal()
+
         maven {
             url uri('../repo')
         }
-        */
+
     }
     dependencies {
         classpath group: 'org.oedteq.cmakecc', name: 'cmake-cc',
@@ -19,8 +19,9 @@ cmakeConfig {
     // these are the defaults
 
     generator = 'Ninja'
+    toolchainFile = ''
     buildingDir = 'build' // the name workingDir is already defined in the task's parent
     // the next two directories are relative to the working directory, 'buildingDir', where cmake is invoked
     cmakeListsDir = "./.."
-    cmakeInstallPrefix = './install'
+    installPrefix = './install'
 }

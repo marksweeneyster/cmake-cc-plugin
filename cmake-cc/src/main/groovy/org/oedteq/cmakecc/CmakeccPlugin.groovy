@@ -13,9 +13,10 @@ class CmakeccPlugin implements Plugin<Project> {
         project.getTasks().create("cmakeTask", CmakeTask.class, new Action<CmakeTask>() {
             public void execute(CmakeTask cmakeTask) {
                 cmakeTask.setGenerator(extension.getGeneratorProvider())
-                cmakeTask.setCmakeInstallPrefix(extension.getCmakeInstallPrefixProvider())
+                cmakeTask.setInstallPrefix(extension.getInstallPrefixProvider())
                 cmakeTask.setCmakeListsDir(extension.getCmakeListsDirProvider())
                 cmakeTask.setBuildingDir(extension.getBuildingDirProvider())
+                cmakeTask.setToolchainFile(extension.getToolchainFileProvider())
             }
         });
 

@@ -9,8 +9,9 @@ import org.gradle.api.provider.Provider
 class CmakeTask extends Exec {
 
     private final PropertyState<String> generator
-    private final PropertyState<String> cmakeInstallPrefix
+    private final PropertyState<String> installPrefix
     private final PropertyState<String> cmakeListsDir
+    private final PropertyState<String> toolchainFile
     private final PropertyState<String> buildingDir
 
     private final String defaultGenerator = 'Ninja'
@@ -19,13 +20,15 @@ class CmakeTask extends Exec {
     private final String defaultBuildingDir = "build"
     // this will be relative to the task's buildingDir
     private final String defaultInstallDir = "./install"
+    private final String defaultToolchainFile = ""
     private final String defaultCmakeListsDir = "./.."
 
     public CmakeTask() {
-        generator = getProject().property(String.class)
-        cmakeInstallPrefix = getProject().property(String.class)
+        generator     = getProject().property(String.class)
+        installPrefix = getProject().property(String.class)
         cmakeListsDir = getProject().property(String.class)
-        buildingDir = getProject().property(String.class)
+        toolchainFile = getProject().property(String.class)
+        buildingDir   = getProject().property(String.class)
 
         executable 'cmake'
 
@@ -34,7 +37,7 @@ class CmakeTask extends Exec {
 
     @Override
     protected void exec() {
-        args = ['-G'+getGenerator(), '-DCMAKE_INSTALL_PREFIX='+getCmakeInstallPrefix(), getCmakeListsDir()]
+        args = ['-G'+getGenerator(), '-DCMAKE_INSTALL_PREFIX='+getInstallPrefix(), getCmakeListsDir()]
         super.exec()
     }
 
@@ -61,14 +64,14 @@ class CmakeTask extends Exec {
     }
 
     @Input
-    public String getCmakeInstallPrefix() {
-        return cmakeInstallPrefix.getOrNull() ?: defaultInstallDir;
+    public String getInstallPrefix() {
+        return installPrefix.getOrNull() ?: defaultInstallDir;
     }
-    public void setCmakeInstallPrefix(String cmakeInstallPrefix) {
-        this.cmakeInstallPrefix.set(cmakeInstallPrefix)
+    public void setInstallPrefix(String installPrefix) {
+        this.installPrefix.set(installPrefix)
     }
-    public void setCmakeInstallPrefix(Provider<String> cmakeInstallPrefix) {
-        this.cmakeInstallPrefix.set(cmakeInstallPrefix)
+    public void setInstallPrefix(Provider<String> installPrefix) {
+        this.installPrefix.set(installPrefix)
     }
 
     @Input
@@ -76,10 +79,21 @@ class CmakeTask extends Exec {
         return buildingDir.getOrNull() ?: defaultBuildingDir;
     }
     public void setBuildingDir(String buildingDir) {
-        this.buildingDir.set(workingDir)
+        this.buildingDir.set(buildingDir)
     }
     public void setBuildingDir(Provider<String> buildingDir) {
         this.buildingDir.set(buildingDir)
+    }
+
+    @Input
+    public String getToolchainFile() {
+        return toolchainFile.getOrNull() ?: defaultToolchainFile;
+    }
+    public void setToolchainFile(String toolchainFile) {
+        this.toolchainFile.set(toolchainFile)
+    }
+    public void setToolchainFile(Provider<String> toolchainFile) {
+        this.toolchainFile.set(toolchainFile)
     }
 }
 
