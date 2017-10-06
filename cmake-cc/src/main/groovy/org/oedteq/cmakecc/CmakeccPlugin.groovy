@@ -9,25 +9,20 @@ class CmakeccPlugin implements Plugin<Project> {
 
     void apply(Project project) {
         CmakeccExtension extension = project.getExtensions().create(EXTENSION_NAME, CmakeccExtension.class, project)
-/*
-        project.task('cmake', type: CmakeTask) {
-            def extension = project.extensions.findByName(EXTENSION_NAME)
-            println extension.generator
-            conventionMapping.generator = {extension.generator}
-        }
-        */
 
         project.getTasks().create("cmakeTask", CmakeTask.class, new Action<CmakeTask>() {
             public void execute(CmakeTask cmakeTask) {
-                cmakeTask.setGenerator(extension.getGeneratorProvider());
-                cmakeTask.setCmakeInstallPrefix(extension.getCmakeInstallPrefixProvider());
+                cmakeTask.setGenerator(extension.getGeneratorProvider())
+                cmakeTask.setCmakeInstallPrefix(extension.getCmakeInstallPrefixProvider())
+                cmakeTask.setCmakeListsDir(extension.getCmakeListsDirProvider())
+                cmakeTask.setBuildingDir(extension.getBuildingDirProvider())
             }
         });
 
         project.getTasks().create("cmakeBuildTask", CmakeBuildTask.class, new Action<CmakeBuildTask>() {
             public void execute(CmakeBuildTask cmakeBuildTask) {
             }
-        }).dependsOn((project.tasks.findByName('cmakeTask')));
+        }).dependsOn((project.tasks.findByName('cmakeTask')))
     }
 }
 

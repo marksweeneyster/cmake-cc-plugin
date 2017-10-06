@@ -9,14 +9,19 @@ class CmakeccExtension {
     String[] platforms= []
     private final PropertyState<String> generator
     private final PropertyState<String> cmakeInstallPrefix
+    private final PropertyState<String> cmakeListsDir
+    // workingDir is already defined for exec tasks so I use buildingDir
+    private final PropertyState<String> buildingDir
 
     CmakeccExtension() {
     }
 
     CmakeccExtension(Project project) {
         //this.project = project
-        generator = project.property(String.class);
+        generator          = project.property(String.class);
         cmakeInstallPrefix = project.property(String.class);
+        cmakeListsDir      = project.property(String.class);
+        buildingDir        = project.property(String.class);
     }
 
     public String getGenerator() {
@@ -37,6 +42,26 @@ class CmakeccExtension {
     }
     public void setCmakeInstallPrefix(String cmakeInstallPrefix) {
         this.cmakeInstallPrefix.set(cmakeInstallPrefix)
+    }
+
+    public String getCmakeListsDir() {
+        return cmakeListsDir.get()
+    }
+    public Provider<String> getCmakeListsDirProvider() {
+        return cmakeListsDir;
+    }
+    public void setCmakeListsDir(String cmakeListsDir) {
+        this.cmakeListsDir.set(cmakeListsDir)
+    }
+
+    public String getBuildingDir() {
+        return buildingDir.get()
+    }
+    public Provider<String> getBuildingDirProvider() {
+        return buildingDir;
+    }
+    public void setBuildingDir(String buildingDir) {
+        this.buildingDir.set(buildingDir)
     }
 
 

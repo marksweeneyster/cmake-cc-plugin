@@ -6,7 +6,10 @@ class CmakeBuildTask extends Exec {
 
     public CmakeBuildTask() {
         executable 'cmake'
-        setWorkingDir("build")
+
+        //File workingDir = new File(getProjectDir(),'build')
+
+        setWorkingDir('build')
     }
 
     @Override
