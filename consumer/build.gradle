@@ -1,9 +1,11 @@
 buildscript {
     repositories {
         mavenLocal()
+        /*
         maven {
             url uri('../repo')
         }
+        */
     }
     dependencies {
         classpath group: 'org.oedteq.cmakecc', name: 'cmake-cc',
@@ -14,6 +16,6 @@ buildscript {
 apply plugin: 'org.oedteq.cmakecc'
 
 cmakeConfig {
-     generator = 'Ninja'
-     cmakeInstallPrefix = '../install'
+     cmakeInstallPrefix = './install'
+     cmakeListsDir = "./.."
 }
